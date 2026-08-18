@@ -435,6 +435,7 @@ __http(BROWSER this, URL U)
   time_t   now;
   struct   tm *tmp;
   size_t   len;
+  size_t   i;
   char     fmtime[65];
   URL      redirect_url = NULL;
 
@@ -696,7 +697,7 @@ __http(BROWSER this, URL U)
     case 403:
       res = FALSE;
 
-      for (size_t i = 0; i < array_length(my.aurl); i++) {
+      for (i = 0; i < array_length(my.aurl); i++) {
         char *url = array_next(my.aurl);
 
         if (url == NULL || url[0] == '\0') {
