@@ -1,7 +1,7 @@
 /**
  * FTP protocol support
  *
- * Copyright (C) 2013-2014 by
+ * Copyright (C) 2013-2026 by
  * Jeffrey Fulmer - <jeff@joedog.org>, et al.
  * This file is distributed as part of Siege
  *
@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <util.h>
 #include <ftp.h>
+#include <stdint.h>
 #include <load.h>
 #include <perl.h>
 #include <memory.h>
@@ -149,10 +150,10 @@ ftp_size(CONN *C, URL U)
 BOOLEAN
 ftp_stor(CONN *C, URL U) 
 {
-  size_t  len;
-  char    *file;
-  size_t  id = pthread_self();
-  int     num = 2;
+  size_t    len;
+  char      *file;
+  uintptr_t id = (uintptr_t)pthread_self();
+  int       num = 2;
   char    **parts;
  
   if (id < 0.0) {
@@ -228,7 +229,6 @@ ftp_list(CONN *C, CONN *D, URL U)
 {
   int  n;
   char c;
-  int  bytes;
 
   C->ftp.code = __request(C, "LIST %s", (url_get_file(U)==NULL)?url_get_path(U):url_get_file(U));
 
@@ -241,7 +241,6 @@ ftp_list(CONN *C, CONN *D, URL U)
       if ((n = socket_read(D, &c, 1)) == 0)
         break;
       if (my.verbose) printf("%c", c);
-      bytes += n;
     } while (TRUE);    
   }
   return TRUE; 
