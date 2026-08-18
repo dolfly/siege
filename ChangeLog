@@ -1,6 +1,12 @@
 To email a contributor remove "DELETE" from the email address.
 (The DELETEs are necessary as this list is published online.)
 
+2026/08/18 Jeffrey Fulmer https://www.joedog.org/support/
+ * src/init.c              Fixed empty test for logfile[] 
+ * src/ftp.c               Made Macintosh clang happy
+ * src/fact.c              Used MAX_COOKIE_LEN 
+ * src/version.c           Version increment: 4.2.0
+
 2026/06/02 Jeffrey Fulmer https://www.joedog.org/support/
  * src/browser.c           Improved 403 handling logic
  * src/browser.h           #include <hash.h>
