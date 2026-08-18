@@ -228,7 +228,8 @@ cookie_get_domain(COOKIE this)
 
   // Optional: validate string
   size_t maxlen = 256;
-  for (size_t i = 0; i < maxlen; ++i) {
+  size_t i = 0;
+  for (i = 0; i < maxlen; ++i) {
     char c = this->domain[i];
     if (c == '\0') break;
     if ((unsigned char)c < 32 || (unsigned char)c > 126) {
