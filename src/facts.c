@@ -103,8 +103,7 @@ private BOOLEAN
 __load_cookies(FACTS this, char * file)
 {
   FILE * fp;
-  const  size_t len = 4096; // max cookie size
-  char   line[len];
+  char   line[MAX_COOKIE_SIZE];
 
   snprintf(this->key, sizeof(this->key), "siege-%d", this->id);
   if (! __contains(file, this->key)) {
@@ -119,8 +118,8 @@ __load_cookies(FACTS this, char * file)
   if (fp == NULL) {
     return FALSE;
   }
-  memset(line, '\0', len);
-  while (fgets(line, len, fp) != NULL){
+  memset(line, '\0', MAX_COOKIE_SIZE);
+  while (fgets(line, MAX_COOKIE_SIZE, fp) != NULL){
     char *p = strchr(line, '\n');
     if (p) {
       *p = '\0';
@@ -149,7 +148,7 @@ __load_cookies(FACTS this, char * file)
       }
       split_free(pair, num); 
     }
-    memset(line, '\0', len);
+    memset(line, '\0', MAX_COOKIE_SIZE);
   } 
   fclose(fp);
   return TRUE;
